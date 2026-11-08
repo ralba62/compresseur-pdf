@@ -66,4 +66,9 @@ jobs:
       - name: Publier la Release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release create "${{ github.ref_name }}" zips/*.zip --repo "${{ github.repository }}" --title "${{ github.ref_name }}" --generate-notes
+          TAG: ${{ github.ref_name }}
+          REPO: ${{ github.repository }}
+        run: |
+          # crée la Release si elle n'existe pas encore (si elle a été créée à la main, on la réutilise)
+          gh release view "$TAG" --repo "$REPO" >/dev/null 2>&1 || gh release create "$TAG" --repo "$REPO" --title "$TAG" --generate-notes
+          gh release upload "$TAG" zips/*.zip --repo "$REPO" --clobber
