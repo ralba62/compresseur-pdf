@@ -25,9 +25,9 @@ jobs:
             icone: icones/icone.ico
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.13"
 
@@ -48,7 +48,7 @@ jobs:
         shell: pwsh
         run: Compress-Archive -Path "dist/Compresseur PDF" -DestinationPath "Compresseur-PDF-${{ matrix.nom }}.zip"
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: Compresseur-PDF-${{ matrix.nom }}
           path: Compresseur-PDF-${{ matrix.nom }}.zip
@@ -58,7 +58,7 @@ jobs:
     if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v8
         with:
           path: zips
           merge-multiple: true
