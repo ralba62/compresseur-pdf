@@ -287,7 +287,7 @@ def fmt(octets):
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
-        self.title("Compresseur de PDF")
+        self.title("Compresseur PDF")
         self.geometry("820x640")
         self.minsize(700, 540)
 
